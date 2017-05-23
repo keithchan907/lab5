@@ -1,64 +1,85 @@
-#include<iostream>
-#include<string>
+#include <iostream>
 #include <cstdlib>
+#include <string>
+#include <cstring>
 using namespace std;
-
 class HugeInt
 {
-	public:
+public:
 	HugeInt();
-	HugeInt(int a);
-	HugeInt(string z);
-	
-	friend ostream & operator(ostream & out , HugeInt s);
-	friend istream & operator(istream & in  , HugeInt &s);  
-	HugeInt operator+(HugeInt &);
-	HugeInt operator-(HugeInt &);
-	
-	private:
-	int b;
-	int number;
-	int Array[1000000];
+	HugeInt(int);
+	HugeInt(string);
+
+	friend istream & operator >> (istream &, HugeInt &);
+	friend ostream & operator<<(ostream &, const HugeInt &);
+	HugeInt operator+(const HugeInt &);
+	HugeInt operator-(const HugeInt &);
+	HugeInt operator=(const HugeInt &);
+
+	void setNumber(int);
+	int getNumber( )const;
+
+private:
+	long int number;
+	long int z;
 };
 
-	HugeInt()::HugeInt()
- { 
+HugeInt::HugeInt() {};
 
- };
-
-	HugeInt :: HugeInt(int a)
- {
-	b=a;
- }
-
-	HugeInt :: HugeInt(string z) //acsll save into array
- {
-	int l=21;
-	for(int i=0;i<l;i++)
-  {
-	Array[i]=z[i]-48;
-  }
-}
-
-	ostream & operator(ostream & out , HugeInt s)
+HugeInt::HugeInt(int a)
 {
-	out << s.number;
-	return out;
+	long int number = a;
 }
 
-friend istream & operator<<(istream & in, HugeInt &s)
+HugeInt::HugeInt(string a)
 {
-	in>>s.number;
-	return in;
+	number = stoi(a);
 }
 
-	HugeInt operator + (HugeInt & aa)
- {
-	return(b+s.number);
-}
-
-	HugeInt operator - (HugeInt & aa )
+istream & operator >> (istream &in, HugeInt &n)
 {
-
+	in >> n.number;
 }
-	
+
+ ostream & operator<<(ostream &out, const HugeInt &n)
+{
+	out << n.number;
+}
+
+HugeInt operator+(const HugeInt &number)
+{
+	return(number + number.getNumber);
+}
+
+HugeInt operator-(const HugeInt &n)
+{
+	return(n - n.getNumber);
+}
+
+HugeInt operator=(const HugeInt &number)
+{
+	number = number.getNumber;
+}
+
+void HugeInt::setNumber(int a)
+{
+	number = a;
+}
+
+int HugeInt::getNumber ()const
+{
+	return number;
+}
+int main()
+{
+	HugeInt x;
+	HugeInt y(28825252);
+	HugeInt z("314159265358979323846");
+	HugeInt result;
+	cin >> x;
+	result = x + y;
+	cout << x << "+" << y << " = " << result << endl;
+	result = z - x;
+	cout << result << endl;
+	return 0;
+}
