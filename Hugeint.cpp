@@ -12,9 +12,9 @@ public:
 
 	friend istream & operator >> (istream &, HugeInt &);
 	friend ostream & operator<<(ostream &, const HugeInt &);
-	HugeInt operator+(const HugeInt &);
-	HugeInt operator-(const HugeInt &);
-	HugeInt operator=(const HugeInt &);
+	HugeInt &operator+(const HugeInt &);
+	HugeInt &operator-(const HugeInt &);
+	HugeInt &operator=(const HugeInt &);
 
 	void setNumber(int);
 	int getNumber( )const;
@@ -39,26 +39,31 @@ HugeInt::HugeInt(string a)
 istream & operator >> (istream &in, HugeInt &n)
 {
 	in >> n.number;
+	return in;
 }
 
  ostream & operator<<(ostream &out, const HugeInt &n)
 {
 	out << n.number;
+	return out;
 }
 
-HugeInt operator+(const HugeInt &number)
+HugeInt& HugeInt::operator+(const HugeInt &a)
 {
-	return(number + number.getNumber);
+	HugeInt temp(number + a.getNumber());
+	return temp;
 }
 
-HugeInt operator-(const HugeInt &n)
+HugeInt& HugeInt::operator-(const HugeInt &n)
 {
-	return(n - n.getNumber);
+	HugeInt temp(number - n.getNumber());
+	return temp;
 }
 
-HugeInt operator=(const HugeInt &number)
+HugeInt& HugeInt::operator=(const HugeInt &a)
 {
-	number = number.getNumber;
+	number = a.getNumber();
+	return *this;
 }
 
 void HugeInt::setNumber(int a)
